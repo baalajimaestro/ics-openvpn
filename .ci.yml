@@ -3,22 +3,14 @@ name: VPN Builder
 agent:
   machine:
     type: e1-standard-2
-  containers:
-    - name: main
-      image: semaphoreci/android:29
+    os_image: ubuntu1804
 blocks:
   - name: Build
     task:
       jobs:
         - name: Hello Android
           commands:
-            - sudo apt update -y &> /dev/null
-            - sudo apt install -y unzip swig cmake &> /dev/null
             - checkout &> /dev/null
             - git submodule update --init --recursive &> /dev/null
-            - echo y | sdkmanager "ndk;21.1.6352462" &> /dev/null
-            - echo y | sdkmanager "extras;google;m2repository" &> /dev/null
-            - echo y | sdkmanager "extras;android;m2repository" &> /dev/null
-            - echo icsopenvpnDebugSign=true > ~/.gradle/gradle.properties
-            - ./gradlew assembleUiRelease
-            - ls ics-openvpn/build/outputs/apk
+            - docker build . -t ci
+            - docker run -it -e GH_PERSONAL_TOKEN=${GH_PERSONAL_TOKEN} -v $(pwd):/tmp/project ci
