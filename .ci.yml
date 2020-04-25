@@ -21,3 +21,4 @@ blocks:
             - echo y | sdkmanager "extras;android;m2repository" &> /dev/null
             - echo icsopenvpnDebugSign=true > ~/.gradle/gradle.properties
             - ./gradlew assembleUiRelease
+            - ls ics-openvpn/build/outputs/apk
