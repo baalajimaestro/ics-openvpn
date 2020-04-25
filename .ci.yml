@@ -12,8 +12,14 @@ blocks:
       jobs:
         - name: Hello Android
           commands:
-            - checkout
-            - echo y | sdkmanager "ndk;21.1.6352462" "extras;google;m2repository" "extras;android;m2repository"
-            
+            - sudo add-apt-repository ppa:teward/swig3.0 -y
+            - sudo apt update
+            - sudo apt install -y unzip swig3.0 cmake &> /dev/null
+            - sudo ln -s /usr/bin/swig3.0 /usr/bin/swig
+            - swig -version
+            - checkout &> /dev/null
+            - echo y | sdkmanager "ndk;21.1.6352462" &> /dev/null
+            - echo y | sdkmanager "extras;google;m2repository" &> /dev/null
+            - echo y | sdkmanager "extras;android;m2repository" &> /dev/null
             - echo icsopenvpnDebugSign=true > ~/.gradle/gradle.properties
             - ./gradlew assembleUiRelease
