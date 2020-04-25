@@ -1,0 +1,19 @@
+version: v1.0
+name: VPN Builder
+agent:
+  machine:
+    type: e1-standard-2
+  containers:
+    - name: main
+      image: semaphoreci/android:29
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: Hello Android
+          commands:
+            - checkout
+            - echo y | sdkmanager "ndk;21.1.6352462" "extras;google;m2repository" "extras;android;m2repository"
+            
+            - echo icsopenvpnDebugSign=true > ~/.gradle/gradle.properties
+            - ./gradlew assembleUiRelease
