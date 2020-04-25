@@ -12,12 +12,10 @@ blocks:
       jobs:
         - name: Hello Android
           commands:
-            - sudo add-apt-repository ppa:teward/swig3.0 -y
-            - sudo apt update
-            - sudo apt install -y unzip swig3.0 cmake &> /dev/null
-            - sudo ln -s /usr/bin/swig3.0 /usr/bin/swig
-            - swig -version
+            - sudo apt update -y &> /dev/null
+            - sudo apt install -y unzip swig cmake &> /dev/null
             - checkout &> /dev/null
+            - git submodule update --init --recursive &> /dev/null
             - echo y | sdkmanager "ndk;21.1.6352462" &> /dev/null
             - echo y | sdkmanager "extras;google;m2repository" &> /dev/null
             - echo y | sdkmanager "extras;android;m2repository" &> /dev/null
