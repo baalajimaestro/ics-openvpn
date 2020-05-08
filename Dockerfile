@@ -10,4 +10,4 @@ RUN echo y | sdkmanager "ndk;21.1.6352462" &> /dev/null && \
 
 WORKDIR /tmp/project
 
-CMD ["bash","build.sh"]
+CMD bash build.sh | ts '[%Y-%m-%d %H:%M:%S]'

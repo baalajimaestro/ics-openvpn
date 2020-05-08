@@ -8,7 +8,7 @@
 
 echo "**MaestroCI App Builder**"
 mkdir -p ~/.ssh
-curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /home/ci/.ssh/id_ed25519 https://raw.githubusercontent.com/baalajimaestro/keys/master/id_ed25519
+curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o ~/.ssh/id_ed25519 https://raw.githubusercontent.com/baalajimaestro/keys/master/id_ed25519
 chmod 600 ~/.ssh/id_ed25519
 echo "SSH Keys Set!"
 
