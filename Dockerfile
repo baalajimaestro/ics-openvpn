@@ -1,6 +1,6 @@
 FROM baalajimaestro/app_build
 
-RUN zypper -n in swig &> /dev/null
+RUN dnf -y install swig &> /dev/null
 
 RUN echo y | sdkmanager "ndk;21.1.6352462" &> /dev/null && \
     echo y | sdkmanager "extras;google;m2repository" &> /dev/null && \ 
@@ -10,4 +10,4 @@ RUN echo y | sdkmanager "ndk;21.1.6352462" &> /dev/null && \
 
 WORKDIR /tmp/project
 
-CMD ["./gradlew","assembleUiRelease"]
+CMD ["bash","build.sh"]
