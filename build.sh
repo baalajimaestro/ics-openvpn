@@ -4,17 +4,19 @@
 #
 # SPDX-License-Identifier: GPL-3.0
 #
-# CI Runner Script for Generation of blobs
+# CI Runner Script for building apps
 
-ssh_keys() {
-  echo "**MaestroCI Flashable Vendor Extractor**"
-  mkdir -p /home/ci/.ssh
-  curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /home/ci/.ssh/id_ed25519 https://raw.githubusercontent.com/baalajimaestro/keys/master/id_ed25519
-  chmod 600 ~/.ssh/id_ed25519
-  echo "SSH Keys Set!"
-}
+echo "**MaestroCI App Builder**"
+mkdir -p ~/.ssh
+curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /home/ci/.ssh/id_ed25519 https://raw.githubusercontent.com/baalajimaestro/keys/master/id_ed25519
+chmod 600 ~/.ssh/id_ed25519
+echo "SSH Keys Set!"
 
-./gradlew assembleUiRelease
+while true; do echo "Building Your App....."; sleep 120; done &
+
+./gradlew assembleUiRelease > /dev/null
+jobs
+kill %1
 
 mkdir main/build/outputs/apk/ui/release/$(date +%d%m%Y)
 mv main/build/outputs/apk/ui/release/main-ui-universal-release.apk main/build/outputs/apk/ui/release/$(date +%d%m%Y)/OpenVPN-XOR-Android-Universal.apk
